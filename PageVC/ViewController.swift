@@ -11,22 +11,30 @@ import UIKit
 class ViewController: UIViewController, UIPageViewControllerDataSource {
 
     var pageViewController: UIPageViewController!
-    var images = [UIImage]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    lazy var datasource: [UIImage] = {
+        var images = [UIImage]()
         for index in 1...9 {
-            let image = UIImage(named: "\(index)")!
+            guard let image = UIImage(named: "\(index)") else {return images}
             images.append(image)
         }
         
-        self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as UIPageViewController
-        self.pageViewController.dataSource = self
+        return images
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupViewController()
+    }
+    
+    func setupViewController() {
+        guard let storyboard = self.storyboard else {return}
+        guard let pageViewController = storyboard.instantiateViewControllerWithIdentifier("PageViewController") as? UIPageViewController else {return}
+        guard let startingViewController = storyboard.instantiateViewControllerWithIdentifier("PageContentViewController") as? PageContentViewController else {return}
         
-        let startingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageContentViewController") as PageContentViewController
-        let viewControllers = [startingViewController]
-        self.pageViewController.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        self.pageViewController = pageViewController
+        self.pageViewController.dataSource = self
+        self.pageViewController.setViewControllers([startingViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
         
         self.addChildViewController(self.pageViewController)
         self.view.addSubview(self.pageViewController.view)
@@ -34,12 +42,11 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func viewControllerAtIndex(index: Int) -> PageContentViewController? {
-        if self.images.count == 0 || index >= self.images.count {
+        if self.datasource.count == 0 || index >= self.datasource.count {
             return nil
         }
         
-        let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageContentViewController") as PageContentViewController
-                
+        guard let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageContentViewController") as? PageContentViewController else {return nil}
         pageContentViewController.imageName = "\(index)"
         pageContentViewController.index = index
         
@@ -47,7 +54,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let pageContentViewController = viewController as PageContentViewController
+        guard let pageContentViewController = viewController as? PageContentViewController else {return nil}
         var index = pageContentViewController.index
         
         if index == 0 || index == NSNotFound {
@@ -60,7 +67,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let pageContentViewController = viewController as PageContentViewController
+        guard let pageContentViewController = viewController as? PageContentViewController else {return nil}
         var index = pageContentViewController.index
         
         index++
@@ -69,7 +76,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
             return nil
         }
         
-        if index == self.images.count {
+        if index == self.datasource.count {
             return nil
         }
         

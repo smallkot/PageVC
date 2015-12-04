@@ -17,11 +17,7 @@ class PageContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let aView = imageView {
-            aView.contentMode = UIViewContentMode.ScaleAspectFill
-            aView.image = UIImage(named: imageName)!
-        }
+        self.setupPageContentViewController()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -30,6 +26,15 @@ class PageContentViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: ... Setup ...
+    
+    func setupPageContentViewController() {
+        guard let aView = self.imageView else {return}
+        guard let image = UIImage(named: self.imageName) else {return}
+        aView.contentMode = .ScaleAspectFill
+        aView.image = image
     }
 
 }

@@ -109,12 +109,9 @@
 		1C7775301A4944F5005CE6FF /* PageVC */ = {
 			isa = PBXGroup;
 			children = (
-				1C7775331A4944F5005CE6FF /* AppDelegate.swift */,
-				1C7775351A4944F5005CE6FF /* ViewController.swift */,
-				1C7775721A4946B4005CE6FF /* PageContentViewController.swift */,
-				1C7775371A4944F5005CE6FF /* Main.storyboard */,
-				1C77753A1A4944F5005CE6FF /* Images.xcassets */,
-				1C77753C1A4944F5005CE6FF /* LaunchScreen.xib */,
+				1CA6117D1C1165870089218B /* App Global */,
+				1CA6117E1C11658F0089218B /* Controller */,
+				1CA6117F1C1165960089218B /* View */,
 				1C7775311A4944F5005CE6FF /* Supporting Files */,
 			);
 			path = PageVC;
@@ -168,6 +165,33 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		1CA6117D1C1165870089218B /* App Global */ = {
+			isa = PBXGroup;
+			children = (
+				1C7775331A4944F5005CE6FF /* AppDelegate.swift */,
+			);
+			name = "App Global";
+			sourceTree = "<group>";
+		};
+		1CA6117E1C11658F0089218B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1C7775351A4944F5005CE6FF /* ViewController.swift */,
+				1C7775721A4946B4005CE6FF /* PageContentViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		1CA6117F1C1165960089218B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1C7775371A4944F5005CE6FF /* Main.storyboard */,
+				1C77753A1A4944F5005CE6FF /* Images.xcassets */,
+				1C77753C1A4944F5005CE6FF /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -212,7 +236,9 @@
 		1C7775261A4944F5005CE6FF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Michael Babiy";
 				TargetAttributes = {
 					1C77752D1A4944F5005CE6FF = {
@@ -347,6 +373,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -409,7 +436,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PageVC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelbabiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -419,7 +448,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PageVC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelbabiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -428,16 +459,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = PageVCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelbabiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PageVC.app/PageVC";
 			};
@@ -447,12 +476,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = PageVCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelbabiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PageVC.app/PageVC";
 			};
@@ -477,6 +504,7 @@
 				1C77754F1A4944F5005CE6FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1C7775501A4944F5005CE6FF /* Build configuration list for PBXNativeTarget "PageVCTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +513,7 @@
 				1C7775521A4944F5005CE6FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
